@@ -1,6 +1,9 @@
 class ArticlesController < ApplicationController
+  before_action :require_login
+  
   def index
     Article.where(status: 'active')
+
   end
 
   def show

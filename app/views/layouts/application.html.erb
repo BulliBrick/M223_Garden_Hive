@@ -1,46 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GardenHive - Your Community Gardening Resource</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'garden-green': '#2ecc71',
-                        'garden-brown': '#795548',
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-green-50 text-gray-800 font-sans h-max flex flex-col">
-<div class="flex-grow flex flex-col">
-<header class="bg-green-600 text-white p-4 shadow-md">
-<div class="container mx-auto flex justify-between items-center">
-    <h1 class="text-2xl font-bold">GardenHive</h1>
-    <nav>
-        <ul class="flex space-x-4">
-            <li><%= link_to "Home", root_path, class: "hover:text-green-200" %></li>
-            <li><%= link_to "Articles", articles_path, class: "hover:text-green-200" %></li>
-            <li><%= link_to "Contribute", new_article_path, class: "hover:text-green-200" %></li>
-            <li><%= link_to "Login", login_path, class: "hover:text-green-200" %></li>
-        </ul>
-    </nav>
-</div>
-</header>
-<main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <%= yield %>
-</main>
-      <footer class="bg-green-800 text-white mt-12 py-6">
-        <div class="container mx-auto text-center ">
-            <p>&copy; 2024 GardenHive. All rights reserved.</p>
+<html class="h-full bg-gray-100">
+  <head>
+    <title>BookHive</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="h-full">
+    <div class="min-h-full">
+      <nav class="bg-indigo-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <%= link_to root_path, class: "text-white font-bold text-xl" do %>
+                  BookHive
+                <% end %>
+              </div>
+              <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                  <%= link_to "Home", root_path, class: "text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium" %>
+                  <%= link_to "Clubs", clubs_path, class: "text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium" %>
+                  <%= link_to "Books", books_path, class: "text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium" %>
+                </div>
+              </div>
+            </div>
+            <div class="hidden md:block">
+              <div class="ml-4 flex items-center md:ml-6">
+                <% if current_user %>
+                  <%= link_to "Profile", user_path(current_user), class: "text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium" %>
+                  <%= button_to "Log out", logout_path, method: :delete, class: "text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium" %>
+                <% else %>
+                  <%= link_to "Log in", login_path, class: "text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium" %>
+                  <%= link_to "Sign up", signup_path, class: "text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
         </div>
-    </footer>
-</div>
-    </body>
+      </nav>
+
+      <main>
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <%= yield %>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>
