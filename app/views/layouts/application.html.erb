@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GardenHive - Your Community Gardening Resource</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'garden-green': '#2ecc71',
+                        'garden-brown': '#795548',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-green-50 text-gray-800 font-sans h-max flex flex-col">
+<div class="flex-grow flex flex-col">
+<header class="bg-green-600 text-white p-4 shadow-md">
+<div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-2xl font-bold">GardenHive</h1>
+    <nav>
+        <ul class="flex space-x-4">
+            <li><%= link_to "Home", root_path, class: "hover:text-green-200" %></li>
+            <li><%= link_to "Articles", articles_path, class: "hover:text-green-200" %></li>
+            <li><%= link_to "Contribute", new_article_path, class: "hover:text-green-200" %></li>
+            <li><%= link_to "Login", login_path, class: "hover:text-green-200" %></li>
+        </ul>
+    </nav>
+</div>
+</header>
+<main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <%= yield %>
+</main>
+      <footer class="bg-green-800 text-white mt-12 py-6">
+        <div class="container mx-auto text-center ">
+            <p>&copy; 2024 GardenHive. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+    </body>
+</html>
